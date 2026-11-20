@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="handbook">
+  <title>Modul Fisika XII: Medan Magnet &amp; Induksi Elektromagnetik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.2/dist/contrib/auto-render.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      /* Handbook Style Tokens */
+      --background: #ffffff;
+      --surface-container-low: #f3f2f1;
+      --surface-container: #e8e7e5;
+      --surface-container-high: #dbdad9;
+      --on-surface: #0b0c0c;
+      --on-surface-variant: #505a5f;
+      --outline: #0b0c0c;
+      --outline-variant: #b1b4b6;
+      --primary: #162e51;
+      --on-primary: #ffffff;
+      --primary-container: #d2e2f1;
+      --on-primary-container: #0c2d4a;
+      --secondary: #4c2c92;
+      --tertiary: #1a569e;
+      --error: #d4351c;
+      --on-error: #ffffff;
+      --data-1: #1a569e;
+      --data-2: #c75a0a;
+      --data-3: #28a197;
+      --data-4: #4c2c92;
+      --data-context: #b1b4b6;
+      --positive: #00703c;
+      --positive-bg: #e6f4ea;
+      --warning: #944a00;
+      --warning-bg: #fff4e5;
+      --error-bg: #fdecea;
+      --focus: #162e51;
+
+      --font-headline: 'Public Sans', sans-serif;
+      --font-body: 'Public Sans', sans-serif;
+      --font-label: 'Public Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --rounded: 0;
+      --rounded-lg: 0;
+      --rounded-full: 0;
+
+      --top-index-rule: 6px solid var(--primary);
+      --inset-rule: 5px solid var(--tertiary);
+      --button-ground: 0 2px 0 #091526;
+      --button-ground-secondary: 0 2px 0 #858686;
+      --focus-yellow: #ffdd00;
+      --focus-ring: 3px solid var(--focus-yellow);
+      --focus-bar: inset 0 0 0 2px var(--on-surface);
+      --focus-underline: 0 -2px var(--focus-yellow), 0 4px var(--on-surface);
+
+      /* Projector-Optimized High-Legibility Scale */
+      --display-size: clamp(2.5rem, 1.5rem + 3.5vw, 4rem);
+      --headline-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.35rem);
+      --subhead-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --body-size: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+      --label-size: 0.875rem;
+
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 5.5rem;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      scroll-behavior: smooth;
+    }
+    header { position: static !important; }
+
+    .page-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: var(--space-lg) var(--space-lg) var(--space-3xl);
+    }
+    .page-shell * { min-width: 0; }
+
+    /* Top Index Header */
+    .index-header {
+      border-top: var(--top-index-rule);
+      border-bottom: 2px solid var(--on-surface);
+      padding: var(--space-sm) 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-weight: 800;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .status-tag {
+      display: inline-block;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 800;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: var(--space-xs) var(--space-sm);
+    }
+    .status-tag--mudah { background: var(--positive-bg); color: var(--positive); }
+    .status-tag--sukar { background: var(--warning-bg); color: var(--warning); }
+    .status-tag--hots { background: var(--error-bg); color: var(--error); }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      color: var(--on-surface);
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      margin: 0;
+    }
+    h1 { font-size: var(--display-size); margin-top: var(--space-md); }
+    h2 { font-size: var(--headline-size); }
+    h3 { font-size: var(--subhead-size); }
+    p { margin: 0 0 var(--space-md); max-width: 72ch; font-weight: 500; }
+    strong { font-weight: 800; }
+
+    .hero-lede {
+      font-size: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+      color: var(--on-surface-variant);
+      font-weight: 600;
+      margin-top: var(--space-md);
+      max-width: 68ch;
+    }
+
+    /* Scorecard & Navigation Strip */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-lg);
+      margin-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 2px solid var(--on-surface);
+      align-items: start;
+    }
+
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-sm);
+    }
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border-left: 4px solid var(--primary);
+      color: var(--on-surface);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      min-height: 48px;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .toc-link:hover {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      padding: 0 var(--space-xs);
+      background: var(--primary);
+      color: var(--on-primary);
+      font-weight: 800;
+      font-size: 0.9375rem;
+      flex-shrink: 0;
+    }
+
+    .inset {
+      border-left: var(--inset-rule);
+      background: var(--surface-container-low);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .inset--navy { border-left-color: var(--primary); }
+
+    .score-panel .score-big {
+      font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+      font-weight: 800;
+      font-family: var(--font-mono);
+      line-height: 1.1;
+      margin: var(--space-xs) 0;
+    }
+    .score-meta {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Buttons */
+    .button {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.2;
+      background: var(--primary);
+      color: var(--on-primary);
+      border: 0;
+      border-radius: var(--rounded);
+      padding: 0.7rem var(--space-lg);
+      min-height: 44px;
+      cursor: pointer;
+      box-shadow: var(--button-ground);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+    }
+    .button:hover { background: var(--tertiary); }
+    .button:active { transform: translateY(2px); box-shadow: none; }
+    .button--secondary {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 2px solid var(--outline);
+      box-shadow: var(--button-ground-secondary);
+    }
+    .button--secondary:hover { background: var(--surface-container); }
+    .button.is-active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 0;
+      box-shadow: var(--focus-bar);
+    }
+    a:focus-visible {
+      outline: none;
+      background: var(--focus-yellow);
+      color: var(--on-surface);
+      text-decoration: none;
+      box-shadow: var(--focus-underline);
+    }
+
+    /* Chapter Section */
+    .chapter {
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-xl);
+      border-top: 6px solid var(--primary);
+    }
+    .chapter-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .chapter-num {
+      background: var(--primary);
+      color: var(--on-primary);
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: var(--space-xs) var(--space-md);
+    }
+
+    /* Sub-grid inside chapter */
+    .duo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .list-bold {
+      margin: var(--space-sm) 0 0;
+      padding-left: 1.35rem;
+    }
+    .list-bold li {
+      margin-bottom: var(--space-sm);
+      font-weight: 600;
+    }
+
+    /* Formula Block */
+    .formula-box {
+      background: var(--surface-container-low);
+      border-left: 5px solid var(--primary);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-md) 0;
+    }
+    .formula-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--on-primary-container);
+      margin-bottom: var(--space-xs);
+    }
+    .formula-math {
+      font-size: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+      font-weight: 700;
+      overflow-x: auto;
+      padding-block: var(--space-xs);
+    }
+    .formula-notes {
+      font-size: 1rem;
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+      font-weight: 600;
+    }
+
+    /* Virtual Lab Panel */
+    .lab-panel {
+      border: 3px solid var(--on-surface);
+      background: var(--background);
+      margin: var(--space-xl) 0;
+    }
+    .lab-header {
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .lab-header h3 {
+      color: var(--on-primary);
+      font-size: 1.25rem;
+    }
+    .lab-badge {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      padding: 0.2rem 0.6rem;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .lab-body {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      align-items: start;
+    }
+
+    .lab-stage {
+      background: var(--surface-container-low);
+      border: 2px solid var(--outline);
+      padding: var(--space-md);
+    }
+    .lab-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      min-height: 250px;
+      background: var(--background);
+      border: 1px solid var(--outline-variant);
+    }
+    .readout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+    .readout-tile {
+      background: var(--background);
+      border-left: 4px solid var(--tertiary);
+      padding: var(--space-sm) var(--space-md);
+    }
+    .readout-label {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+    }
+    .readout-val {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lab-controls {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    .control-val {
+      font-family: var(--font-mono);
+      color: var(--tertiary);
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 36px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .lenz-banner {
+      margin-top: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 700;
+      font-size: 0.98rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    /* Interactive Quiz Block */
+    .quiz-section {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 2px solid var(--outline-variant);
+    }
+    .quiz-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .quiz-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .quiz-card {
+      background: var(--surface-container-low);
+      border-left: 5px solid var(--primary);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .quiz-q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .quiz-q-num {
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+    .quiz-question {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: var(--space-md);
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-sm);
+    }
+    .quiz-opt-btn {
+      text-align: left;
+      background: var(--background);
+      color: var(--on-surface);
+      border: 2px solid var(--outline);
+      padding: var(--space-sm) var(--space-md);
+      min-height: 48px;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .quiz-opt-btn:hover { background: var(--primary-container); }
+    .quiz-opt-btn.is-correct {
+      background: var(--positive-bg);
+      border-color: var(--positive);
+      color: var(--on-surface);
+      font-weight: 800;
+    }
+    .quiz-opt-btn.is-wrong {
+      background: var(--error-bg);
+      border-color: var(--error);
+      color: var(--on-surface);
+    }
+    .opt-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: var(--on-primary);
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .quiz-feedback {
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      border-left: 4px solid var(--outline);
+      font-weight: 600;
+      display: none;
+    }
+    .quiz-feedback.is-visible { display: block; }
+    .quiz-feedback.is-ok { border-left-color: var(--positive); }
+    .quiz-feedback.is-err { border-left-color: var(--error); }
+
+    /* Summary Table & Closing */
+    table.summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-lg) 0;
+      font-size: 1.05rem;
+    }
+    table.summary-table th, table.summary-table td {
+      text-align: left;
+      padding: var(--space-sm) var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      font-weight: 600;
+    }
+    table.summary-table th {
+      border-bottom: 3px solid var(--on-surface);
+      font-weight: 800;
+      background: var(--surface-container-low);
+    }
+
+    .motivation-block {
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+      border-left: 8px solid var(--focus-yellow);
+    }
+    .motivation-block h3 {
+      color: var(--on-primary);
+      margin-bottom: var(--space-md);
+    }
+    .motivation-block p {
+      color: var(--on-primary);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .back-top {
+      display: inline-block;
+      margin-top: var(--space-md);
+      color: var(--tertiary);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 820px) {
+      .overview-grid, .lab-body { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .page-shell { padding: var(--space-md); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell" id="top">
+    <div class="index-header">
+      <span>FISIKA SMA/MA KELAS XII &middot; FASE F KURIKULUM MERDEKA</span>
+      <span class="status-tag">MODUL INTERAKTIF PROYEKTOR</span>
+    </div>
+
+    <header>
+      <h1>Medan Magnet dan Induksi Elektromagnetik</h1>
+      <p class="hero-lede">
+        Panduan pembelajaran interaktif lengkap 6 bab: konsep fluks magnetik, Hukum Faraday dan Lenz,
+        perumusan GGL induksi, generator AC/DC, induktansi diri, hingga transformator daya tinggi beserta
+        6 laboratorium maya dan 30 latihan soal bertingkat.
+      </p>
+    </header>
+
+    <section class="overview-grid" aria-label="Navigasi Bab dan Skor Latihan">
+      <div>
+        <h2 style="margin-bottom: var(--space-md); font-size: var(--subhead-size);">Peta Materi 6 Bab Utama</h2>
+        <nav aria-label="Daftar Bab">
+          <ol class="toc-list">
+            <li><a class="toc-link" href="#bab-1"><span class="step-badge">1</span>Fluks Magnetik ($\Phi$)</a></li>
+            <li><a class="toc-link" href="#bab-2"><span class="step-badge">2</span>GGL Induksi &amp; Faraday/Lenz</a></li>
+            <li><a class="toc-link" href="#bab-3"><span class="step-badge">3</span>Besar GGL Induksi</a></li>
+            <li><a class="toc-link" href="#bab-4"><span class="step-badge">4</span>Generator AC dan DC</a></li>
+            <li><a class="toc-link" href="#bab-5"><span class="step-badge">5</span>Induktansi Diri &amp; Energi</a></li>
+            <li><a class="toc-link" href="#bab-6"><span class="step-badge">6</span>Transformator &amp; Efisiensi</a></li>
+          </ol>
+        </nav>
+      </div>
+
+      <aside class="inset inset--navy score-panel" aria-live="polite">
+        <div class="readout-label">Capaian Evaluasi Kelas</div>
+        <div class="score-big" id="global-score">0 / 30</div>
+        <div class="score-meta" id="global-progress">0 soal terjawab dari 30 soal</div>
+        <button type="button" class="button button--secondary" id="reset-btn" onclick="handleResetProgress(this)">
+          Ulangi Semua Jawaban
+        </button>
+      </aside>
+    </section>
+
+    <!-- ================= BAB 1 ================= -->
+    <article class="chapter" id="bab-1">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 1</span>
+        <h2>Fluks Magnetik ($\Phi$)</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik mampu menjelaskan konsep fluks magnetik sebagai kerapatan garis medan magnet yang menembus suatu permukaan bidang tertutup secara tepat.</li>
+            <li>Peserta didik mampu menghitung besarnya fluks magnetik pada berbagai posisi sudut bidang terhadap arah medan magnet.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>Scanner MRI (Magnetic Resonance Imaging):</strong> Memanfaatkan kerapatan fluks medan magnet superkuat (1,5–3 Tesla) untuk memetakan struktur organ dalam tubuh manusia secara non-invasif.</li>
+            <li><strong>Sensor Kompas Digital Smartphone:</strong> Mengukur komponen fluks medan magnetik Bumi terhadap sumbu sensor magnetometer untuk menentukan arah mata angin secara akurat.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          <strong>Fluks magnetik ($\Phi$)</strong> adalah ukuran jumlah garis-garis gaya medan magnet yang menembus suatu luasan bidang tertentu secara tegak lurus. Secara geometris, sudut $\theta$ diukur antara arah vektor medan magnet ($B$) dan <strong>garis normal bidang ($N$)</strong> (garis yang selalu tegak lurus permukaan bidang).
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Persamaan Fluks Magnetik</div>
+          <div class="formula-math">$$\Phi = B \cdot A \cdot \cos \theta$$</div>
+          <div class="formula-notes">
+            <strong>Keterangan:</strong> $\Phi$ = fluks magnetik ($\text{Wb}$ atau $\text{T}\cdot\text{m}^2$), $B$ = kuat medan magnet ($\text{T}$), $A$ = luas penampang bidang ($\text{m}^2$), $\theta$ = sudut antara vektor $\vec{B}$ dan garis normal $\vec{N}$.
+            <br><strong>Kasus Khusus:</strong> Jika $\vec{B}$ tegak lurus bidang ($\theta = 0^\circ$), $\Phi_{\text{maks}} = B \cdot A$. Jika $\vec{B}$ sejajar bidang ($\theta = 90^\circ$), $\Phi = 0\text{ Wb}$.
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 1 -->
+      <section class="lab-panel" aria-label="Lab Maya 1 Fluks Magnetik">
+        <div class="lab-header">
+          <h3>Lab Maya 1: Eksplorasi Sudut &amp; Fluks Magnetik</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-1" viewBox="0 0 440 260" role="img" aria-label="Visualisasi garis medan magnet menembus bidang luasan">
+              <defs>
+                <marker id="arrow-b1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0,1 L10,5 L0,9 z" fill="var(--data-1)"/>
+                </marker>
+                <marker id="arrow-n1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0,1 L10,5 L0,9 z" fill="var(--data-2)"/>
+                </marker>
+              </defs>
+              <g id="lab1-field-lines"></g>
+              <g id="lab1-plane-group" transform="translate(230, 130)">
+                <rect id="lab1-plane-rect" x="-10" y="-75" width="20" height="150" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="3"/>
+                <line x1="0" y1="0" x2="95" y2="0" stroke="var(--data-2)" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arrow-n1)"/>
+                <text x="58" y="-10" fill="var(--data-2)" font-weight="800" font-size="14">N (Normal)</text>
+              </g>
+              <text x="20" y="26" fill="var(--data-1)" font-weight="800" font-size="15">Garis Medan B (kanan)</text>
+              <text id="lab1-angle-label" x="20" y="242" fill="var(--on-surface)" font-weight="800" font-size="15">θ = 0° (Tegak lurus bidang)</text>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">cos(&theta;)</div>
+                <div class="readout-val" id="out-lab1-cos">1.000</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Fluks (&Phi;)</div>
+                <div class="readout-val" id="out-lab1-phi">0.800 Wb</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Status Tembusan</div>
+                <div class="readout-val" id="out-lab1-status">Maksimum</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="control-group">
+              <label class="control-label" for="lab1-b">Kuat Medan Magnet (B) <span class="control-val" id="val-lab1-b">2.0 T</span></label>
+              <input type="range" id="lab1-b" min="0.5" max="5" step="0.5" value="2" oninput="updateLab1()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab1-a">Luas Bidang (A) <span class="control-val" id="val-lab1-a">0.40 m&sup2;</span></label>
+              <input type="range" id="lab1-a" min="0.1" max="1.0" step="0.05" value="0.4" oninput="updateLab1()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab1-theta">Sudut Normal Bidang (&theta;) <span class="control-val" id="val-lab1-theta">0&deg;</span></label>
+              <input type="range" id="lab1-theta" min="0" max="90" step="5" value="0" oninput="updateLab1()">
+            </div>
+            <div class="lenz-banner" id="lab1-insight">
+              Pada &theta; = 0&deg;, seluruh garis medan menembus bidang tegak lurus sehingga fluks magnetik mencapai nilai maksimum.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 1 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-1">Skor Bab 1: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-1"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= BAB 2 ================= -->
+    <article class="chapter" id="bab-2">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 2</span>
+        <h2>GGL Induksi &amp; Hukum Faraday / Lenz</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik mampu menganalisis hubungan antara laju perubahan fluks magnetik dengan timbulnya GGL induksi berdasarkan percobaan Faraday.</li>
+            <li>Peserta didik mampu menentukan arah arus induksi di dalam kumparan menggunakan prinsip Hukum Lenz.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>Kompor Induksi (Induction Cooker):</strong> Arus bolak-balik frekuensi tinggi menghasilkan perubahan fluks magnetik sangat cepat, memicu arus Eddy pada panci feromagnetik sehingga memanaskan panci secara langsung.</li>
+            <li><strong>Rem Elektromagnetik (Eddy Current Brake):</strong> Dipakai pada kereta cepat Shinkansen dan roller coaster untuk pengereman mulus tanpa gesekan mekanis atau keausan kampas.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          <strong>Hukum Faraday</strong> menyatakan bahwa gaya gerak listrik (GGL) induksi pada ujung-ujung kumparan berbanding lurus dengan laju perubahan fluks magnetik yang dilingkupinya. <strong>Hukum Lenz</strong> menjelaskan arti tanda negatif: arus induksi selalu menghasilkan medan magnet induksi yang arahnya <strong>melawan/menentang perubahan fluks penyebabnya</strong>.
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Hukum Faraday - Lenz</div>
+          <div class="formula-math">$$\varepsilon = -N \frac{\Delta \Phi}{\Delta t} \quad \text{atau} \quad \varepsilon = -N \frac{d\Phi}{dt}$$</div>
+          <div class="formula-notes">
+            <strong>Keterangan:</strong> $\varepsilon$ = GGL induksi ($\text{Volt}$), $N$ = jumlah lilitan kumparan, $\frac{\Delta\Phi}{\Delta t}$ = laju perubahan fluks magnetik ($\text{Wb/s}$).
+            <br><strong>Aturan Lenz:</strong> Jika magnet <em>mendekat</em>, kumparan menolak (kutub sejenis muncul). Jika magnet <em>menjauh</em>, kumparan menarik (kutub berlawanan muncul).
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 2 -->
+      <section class="lab-panel" aria-label="Lab Maya 2 GGL Induksi Faraday dan Lenz">
+        <div class="lab-header">
+          <h3>Lab Maya 2: Percobaan Faraday, Galvanometer &amp; Hukum Lenz</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-2" viewBox="0 0 460 270" role="img" aria-label="Simulasi magnet batang, kumparan, galvanometer, dan lampu LED">
+              <!-- Coil -->
+              <rect x="235" y="90" width="120" height="80" fill="var(--surface-container-low)" stroke="var(--outline)" stroke-width="2"/>
+              <g id="lab2-coil-turns"></g>
+              <!-- Wires to LED and Galvanometer -->
+              <polyline points="245,170 245,215 170,215 170,195" fill="none" stroke="var(--on-surface)" stroke-width="3"/>
+              <polyline points="345,170 345,215 405,215 405,195" fill="none" stroke="var(--on-surface)" stroke-width="3"/>
+              <!-- Galvanometer -->
+              <circle cx="150" cy="175" r="34" fill="var(--background)" stroke="var(--outline)" stroke-width="3"/>
+              <text x="150" y="198" text-anchor="middle" font-weight="800" font-size="12" fill="var(--on-surface-variant)">GALV (G)</text>
+              <line id="lab2-needle" x1="150" y1="180" x2="150" y2="148" stroke="var(--error)" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="150" cy="180" r="4" fill="var(--on-surface)"/>
+              <!-- LED Bulb -->
+              <circle id="lab2-led-glow" cx="405" cy="170" r="24" fill="var(--focus-yellow)" opacity="0"/>
+              <circle id="lab2-led-bulb" cx="405" cy="170" r="14" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="2.5"/>
+              <text x="405" y="145" text-anchor="middle" font-weight="800" font-size="12" fill="var(--on-surface)">LED</text>
+              <!-- Movable Magnet -->
+              <g id="lab2-magnet" transform="translate(55, 110)">
+                <rect id="lab2-mag-left" x="0" y="0" width="60" height="40" fill="var(--data-2)" stroke="var(--outline)" stroke-width="2.5"/>
+                <rect id="lab2-mag-right" x="60" y="0" width="60" height="40" fill="var(--tertiary)" stroke="var(--outline)" stroke-width="2.5"/>
+                <text id="lab2-pole-left" x="30" y="26" text-anchor="middle" fill="var(--on-primary)" font-weight="800" font-size="18">S</text>
+                <text id="lab2-pole-right" x="90" y="26" text-anchor="middle" fill="var(--on-primary)" font-weight="800" font-size="18">U</text>
+              </g>
+              <!-- Lenz indicator on coil face -->
+              <text id="lab2-lenz-pole" x="235" y="78" font-weight="800" font-size="14" fill="var(--primary)">Kumparan: Diam (Fluks Tetap)</text>
+              <text id="lab2-current-dir" x="295" y="238" text-anchor="middle" font-weight="800" font-size="14" fill="var(--tertiary)">Arus Induksi: 0 A</text>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">GGL Induksi (&varepsilon;)</div>
+                <div class="readout-val" id="out-lab2-emf">0.00 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Nyala LED</div>
+                <div class="readout-val" id="out-lab2-led">Padam</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Kutub Lawan Lenz</div>
+                <div class="readout-val" id="out-lab2-lenz">Netral</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="control-group">
+              <label class="control-label" for="lab2-pos">Geser Posisi Magnet Manual <span class="control-val" id="val-lab2-pos">Luar</span></label>
+              <input type="range" id="lab2-pos" min="20" max="190" step="1" value="35" oninput="moveMagnetManual(this.value)">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab2-v">Kecepatan Gerak Otomatis (v) <span class="control-val" id="val-lab2-v">3.0 m/s</span></label>
+              <input type="range" id="lab2-v" min="1" max="6" step="0.5" value="3" oninput="updateLab2Labels()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab2-n">Jumlah Lilitan (N) <span class="control-val" id="val-lab2-n">200 lilitan</span></label>
+              <input type="range" id="lab2-n" min="50" max="500" step="50" value="200" oninput="updateLab2Coil()">
+            </div>
+            <div class="btn-row">
+              <button type="button" class="button" onclick="animateMagnet(-1)">Dorong Masuk</button>
+              <button type="button" class="button button--secondary" onclick="animateMagnet(1)">Tarik Keluar</button>
+              <button type="button" class="button button--secondary" id="lab2-pol-btn" onclick="toggleLab2Polarity()">Balik Kutub (U/S)</button>
+            </div>
+            <div class="lenz-banner" id="lab2-lenz-msg">
+              Geser slider posisi atau tekan tombol Dorong/Tarik untuk melihat simpangan jarum galvanometer dan nyala lampu LED!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 2 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-2">Skor Bab 2: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-2"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= BAB 3 ================= -->
+    <article class="chapter" id="bab-3">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 3</span>
+        <h2>Besar GGL Induksi pada Berbagai Kondisi</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik dapat memformulasikan besar GGL induksi akibat perubahan kuat medan magnet, perubahan luas penampang, maupun gerakan kawat lurus dalam medan magnet.</li>
+            <li>Peserta didik dapat menghitung besar GGL induksi dan kuat arus induksi pada rangkaian kawat konduktor yang bergerak memotong medan magnet.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>Pickup Gitar Listrik:</strong> Getaran senar baja mengubah medan magnet di sekitar kumparan pickup sehingga menginduksi sinyal listrik audio ke amplifier.</li>
+            <li><strong>Sensor Speedometer Sepeda Elektronik:</strong> Magnet kecil pada jari-jari roda memotong kumparan sensor di garpu sepeda setiap putaran untuk menghitung kelajuan linier.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          Karena $\Phi = B A \cos\theta$, perubahan pada salah satu besaran ($B$, $A$, atau posisi kawat konduktor yang menyapu luas baru) akan membangkitkan GGL induksi dengan tiga bentuk persamaan utama:
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Tiga Kasus Khusus GGL Induksi</div>
+          <div class="formula-math">
+            1) Perubahan Medan ($B$): $\varepsilon = -N A \cos\theta \frac{\Delta B}{\Delta t}$ &nbsp;|&nbsp;
+            2) Perubahan Luas ($A$): $\varepsilon = -N B \cos\theta \frac{\Delta A}{\Delta t}$
+            <br>
+            3) Kawat Konduktor Bergerak: $\varepsilon = B \cdot l \cdot v \cdot \sin\theta$ &nbsp;dan&nbsp; $I = \frac{\varepsilon}{R} = \frac{Blv\sin\theta}{R}$
+          </div>
+          <div class="formula-notes">
+            <strong>Keterangan:</strong> $l$ = panjang kawat konduktor dalam medan ($\text{m}$), $v$ = kecepatan gerak kawat ($\text{m/s}$), $\theta$ = sudut antara arah kecepatan $\vec{v}$ dan medan $\vec{B}$, $R$ = hambatan total rangkaian ($\Omega$).
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 3 -->
+      <section class="lab-panel" aria-label="Lab Maya 3 Kawat Bergerak dalam Medan Magnet">
+        <div class="lab-header">
+          <h3>Lab Maya 3: Kawat Konduktor Bergerak pada Rel-U</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-3" viewBox="0 0 440 250" role="img" aria-label="Kawat PQ bergerak ke kanan memotong medan magnet masuk bidang">
+              <!-- Magnetic field X symbols -->
+              <g id="lab3-field-x" fill="var(--tertiary)" font-weight="800" font-size="16" opacity="0.65"></g>
+              <!-- U-rail -->
+              <polyline points="380,55 60,55 60,195 380,195" fill="none" stroke="var(--on-surface)" stroke-width="5"/>
+              <!-- Resistor box on left rail -->
+              <rect x="44" y="100" width="32" height="50" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="3"/>
+              <text x="60" y="130" text-anchor="middle" font-weight="800" font-size="14" fill="var(--on-primary-container)">R</text>
+              <!-- Moving wire PQ -->
+              <g id="lab3-rod" transform="translate(200, 0)">
+                <line x1="0" y1="45" x2="0" y2="205" stroke="var(--data-2)" stroke-width="8" stroke-linecap="round"/>
+                <text x="-14" y="42" font-weight="800" font-size="15" fill="var(--on-surface)">P</text>
+                <text x="-14" y="220" font-weight="800" font-size="15" fill="var(--on-surface)">Q</text>
+                <line x1="8" y1="125" x2="62" y2="125" stroke="var(--positive)" stroke-width="4"/>
+                <polygon points="62,118 76,125 62,132" fill="var(--positive)"/>
+                <text x="38" y="114" text-anchor="middle" font-weight="800" font-size="14" fill="var(--positive)">v</text>
+              </g>
+              <text x="230" y="24" text-anchor="middle" font-weight="800" font-size="14" fill="var(--tertiary)">Medan B Masuk Bidang (&otimes;) &middot; Arus Mengalir Q &rarr; P</text>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">GGL Induksi (&varepsilon;)</div>
+                <div class="readout-val" id="out-lab3-emf">1.60 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Arus Induksi (I)</div>
+                <div class="readout-val" id="out-lab3-i">0.40 A</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Gaya Lorentz (F)</div>
+                <div class="readout-val" id="out-lab3-f">0.32 N</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="control-group">
+              <label class="control-label" for="lab3-b">Kuat Medan Magnet (B) <span class="control-val" id="val-lab3-b">0.8 T</span></label>
+              <input type="range" id="lab3-b" min="0.2" max="2.0" step="0.2" value="0.8" oninput="updateLab3()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab3-l">Panjang Kawat (l) <span class="control-val" id="val-lab3-l">0.5 m</span></label>
+              <input type="range" id="lab3-l" min="0.2" max="1.5" step="0.1" value="0.5" oninput="updateLab3()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab3-v">Kecepatan Kawat (v) <span class="control-val" id="val-lab3-v">4.0 m/s</span></label>
+              <input type="range" id="lab3-v" min="0" max="10" step="0.5" value="4" oninput="updateLab3()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab3-r">Hambatan Rangkaian (R) <span class="control-val" id="val-lab3-r">4 &Omega;</span></label>
+              <input type="range" id="lab3-r" min="1" max="20" step="1" value="4" oninput="updateLab3()">
+            </div>
+            <div class="btn-row">
+              <button type="button" class="button" id="lab3-anim-btn" onclick="toggleLab3Anim()">Jalankan Gerak Kawat</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 3 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-3">Skor Bab 3: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-3"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= BAB 4 ================= -->
+    <article class="chapter" id="bab-4">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 4</span>
+        <h2>Generator (Pembangkit Listrik AC dan DC)</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik mampu membedakan prinsip kerja serta komponen utama penyusun generator AC (cincin luncur) dan generator DC (komutator cincin belah).</li>
+            <li>Peserta didik mampu menghitung nilai GGL maksimum serta GGL sesaat sinusoidal yang dihasilkan oleh generator listrik.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>PLTA (Pembangkit Listrik Tenaga Air):</strong> Energi potensial air memutar turbin dan kumparan generator raksasa untuk memasok listrik PLN secara masif.</li>
+            <li><strong>Genset (Generator Set) Darurat:</strong> Mengubah energi gerak mesin bakar menjadi energi listrik AC cadangan saat listrik utama padam di sekolah atau rumah sakit.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          Generator mengubah energi mekanik rotasi menjadi energi listrik. Ketika kumparan berputar dengan kecepatan sudut konstan $\omega$, sudut terhadap garis normal berubah sebagai $\theta = \omega t$, menghasilkan gelombang sinusoidal:
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Persamaan Generator AC &amp; DC</div>
+          <div class="formula-math">$$\varepsilon(t) = N \cdot B \cdot A \cdot \omega \sin(\omega t) \quad \text{dengan} \quad \varepsilon_{\text{maks}} = N \cdot B \cdot A \cdot \omega$$</div>
+          <div class="formula-notes">
+            <strong>Perbedaan Mekanik:</strong>
+            <br>&bull; <strong>Generator AC (Arus Bolak-Balik):</strong> Memakai <strong>cincin luncur ganda (slip ring)</strong> sehingga arah arus berbalik tiap setengah putaran (grafik sinus murni positif-negatif).
+            <br>&bull; <strong>Generator DC (Arus Searah):</strong> Memakai <strong>komutator (cincin belah)</strong> yang membalik kontak tiap setengah putaran sehingga polaritas keluaran selalu searah ($\varepsilon = |\varepsilon_{\text{maks}} \sin(\omega t)|$).
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 4 -->
+      <section class="lab-panel" aria-label="Lab Maya 4 Generator AC dan DC">
+        <div class="lab-header">
+          <h3>Lab Maya 4: Simulator Generator AC vs DC &amp; Osiloskop</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-4" viewBox="0 0 460 260" role="img" aria-label="Rotor kumparan generator dan grafik gelombang GGL real-time">
+              <!-- Magnet Poles -->
+              <rect x="14" y="75" width="38" height="100" fill="var(--data-2)" stroke="var(--outline)" stroke-width="2"/>
+              <text x="33" y="132" text-anchor="middle" fill="var(--on-primary)" font-weight="800" font-size="18">U</text>
+              <rect x="168" y="75" width="38" height="100" fill="var(--tertiary)" stroke="var(--outline)" stroke-width="2"/>
+              <text x="187" y="132" text-anchor="middle" fill="var(--on-primary)" font-weight="800" font-size="18">S</text>
+              <!-- Rotating Coil Projection -->
+              <g transform="translate(110, 125)">
+                <ellipse id="lab4-coil-ellipse" cx="0" cy="0" rx="42" ry="38" fill="none" stroke="var(--primary)" stroke-width="5"/>
+                <line x1="-42" y1="0" x2="42" y2="0" stroke="var(--outline-variant)" stroke-dasharray="4 3"/>
+                <text id="lab4-ring-label" x="0" y="75" text-anchor="middle" font-weight="800" font-size="13" fill="var(--on-surface)">Cincin Luncur (AC)</text>
+              </g>
+              <!-- Oscilloscope Grid -->
+              <rect x="225" y="25" width="220" height="205" fill="var(--background)" stroke="var(--outline)" stroke-width="2"/>
+              <line x1="225" y1="127" x2="445" y2="127" stroke="var(--outline-variant)" stroke-width="1.5"/>
+              <text x="233" y="43" font-weight="800" font-size="12" fill="var(--on-surface-variant)">Gelombang &varepsilon;(t)</text>
+              <polyline id="lab4-wave" points="" fill="none" stroke="var(--data-1)" stroke-width="3"/>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">GGL Maksimum (&varepsilon;<sub>maks</sub>)</div>
+                <div class="readout-val" id="out-lab4-max">24.0 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">GGL Sesaat &varepsilon;(t)</div>
+                <div class="readout-val" id="out-lab4-inst">0.0 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Mode Komponen</div>
+                <div class="readout-val" id="out-lab4-mode">Slip Ring (AC)</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="btn-row">
+              <button type="button" class="button is-active" id="btn-gen-ac" onclick="setLab4Mode('AC')">Mode Generator AC</button>
+              <button type="button" class="button button--secondary" id="btn-gen-dc" onclick="setLab4Mode('DC')">Mode Generator DC</button>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab4-n">Jumlah Lilitan (N) <span class="control-val" id="val-lab4-n">100</span></label>
+              <input type="range" id="lab4-n" min="20" max="300" step="20" value="100" oninput="updateLab4Params()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab4-b">Medan Magnet (B) <span class="control-val" id="val-lab4-b">0.40 T</span></label>
+              <input type="range" id="lab4-b" min="0.1" max="1.0" step="0.1" value="0.4" oninput="updateLab4Params()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab4-w">Kecepatan Sudut (&omega;) <span class="control-val" id="val-lab4-w">6.0 rad/s</span></label>
+              <input type="range" id="lab4-w" min="1" max="12" step="1" value="6" oninput="updateLab4Params()">
+            </div>
+            <div class="btn-row">
+              <button type="button" class="button button--secondary" id="lab4-play-btn" onclick="toggleLab4Play()">Jeda Putaran</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 4 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-4">Skor Bab 4: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-4"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= BAB 5 ================= -->
+    <article class="chapter" id="bab-5">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 5</span>
+        <h2>Induktansi Diri &amp; Energi Induktor</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik mampu merumuskan besarnya induktansi diri solenoida serta GGL induksi diri akibat perubahan arus listrik yang mengalir padanya.</li>
+            <li>Peserta didik dapat menghitung besar energi magnetik yang tersimpan di dalam medan magnet sebuah induktor.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>Wireless Fast Charging Smartphone:</strong> Menggunakan induktansi timbal-balik dan induktansi diri antara kumparan pemancar pada pad charger dan kumparan penerima di balik ponsel.</li>
+            <li><strong>Ballast / Choke Coil pada Lampu TL:</strong> Induktor menahan lonjakan arus mendadak sekaligus menghasilkan tegangan tinggi sesaat untuk menyalakan gas di dalam tabung lampu.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          Ketika arus pada kumparan berubah terhadap waktu, fluks magnetik yang dihasilkannya sendiri ikut berubah sehingga memicu <strong>GGL induksi diri</strong>. Ukuran kemampuan kumparan menentang perubahan arus disebut <strong>induktansi diri ($L$)</strong> dengan satuan Henry ($\text{H}$).
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Induktansi Diri Solenoida, GGL Diri, dan Energi Induktor</div>
+          <div class="formula-math">
+            $$L = \frac{\mu_0 \cdot N^2 \cdot A}{l} \qquad \varepsilon = -L \frac{\Delta I}{\Delta t} \qquad W = \frac{1}{2} L I^2$$
+          </div>
+          <div class="formula-notes">
+            <strong>Keterangan:</strong> $\mu_0 = 4\pi \times 10^{-7}\text{ Wb/A}\cdot\text{m}$, $N$ = jumlah lilitan, $A$ = luas penampang solenoida ($\text{m}^2$), $l$ = panjang solenoida ($\text{m}$), $W$ = energi tersimpan ($\text{Joule}$).
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 5 -->
+      <section class="lab-panel" aria-label="Lab Maya 5 Induktansi Diri dan Energi Induktor">
+        <div class="lab-header">
+          <h3>Lab Maya 5: Perancang Solenoida &amp; Energi Magnetik Induktor</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-5" viewBox="0 0 440 230" role="img" aria-label="Visualisasi geometri solenoida dan batang energi induktor">
+              <rect x="40" y="65" width="230" height="70" fill="var(--primary-container)" stroke="var(--primary)" stroke-width="3"/>
+              <g id="lab5-windings"></g>
+              <text x="155" y="160" text-anchor="middle" font-weight="800" font-size="14" fill="var(--on-surface)" id="lab5-dim-label">Solenoida: N = 400 &middot; l = 0.20 m</text>
+              <!-- Energy Bar -->
+              <text x="345" y="34" text-anchor="middle" font-weight="800" font-size="13" fill="var(--on-surface)">Energi (W)</text>
+              <rect x="320" y="45" width="50" height="145" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="2"/>
+              <rect id="lab5-energy-bar" x="322" y="130" width="46" height="58" fill="var(--data-3)"/>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">Induktansi Diri (L)</div>
+                <div class="readout-val" id="out-lab5-l">2.01 mH</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">GGL Induksi Diri (|&varepsilon;|)</div>
+                <div class="readout-val" id="out-lab5-emf">0.10 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Energi Tersimpan (W)</div>
+                <div class="readout-val" id="out-lab5-w">9.05 mJ</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="control-group">
+              <label class="control-label" for="lab5-n">Jumlah Lilitan (N) <span class="control-val" id="val-lab5-n">400</span></label>
+              <input type="range" id="lab5-n" min="100" max="1000" step="100" value="400" oninput="updateLab5()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab5-l">Panjang Solenoida (l) <span class="control-val" id="val-lab5-l">0.20 m</span></label>
+              <input type="range" id="lab5-l" min="0.1" max="0.5" step="0.05" value="0.2" oninput="updateLab5()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab5-i">Kuat Arus (I) <span class="control-val" id="val-lab5-i">3.0 A</span></label>
+              <input type="range" id="lab5-i" min="0.5" max="8.0" step="0.5" value="3.0" oninput="updateLab5()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab5-didt">Laju Perubahan Arus (&Delta;I/&Delta;t) <span class="control-val" id="val-lab5-didt">50 A/s</span></label>
+              <input type="range" id="lab5-didt" min="10" max="200" step="10" value="50" oninput="updateLab5()">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 5 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-5">Skor Bab 5: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-5"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= BAB 6 ================= -->
+    <article class="chapter" id="bab-6">
+      <div class="chapter-head">
+        <span class="chapter-num">Bab 6</span>
+        <h2>Transformator (Step-Up, Step-Down &amp; Efisiensi)</h2>
+      </div>
+
+      <div class="duo-grid">
+        <section class="inset inset--navy">
+          <h3>Tujuan Pembelajaran</h3>
+          <ol class="list-bold">
+            <li>Peserta didik dapat menjelaskan fungsi transformator serta menganalisis perbandingan tegangan, arus, dan jumlah lilitan pada transformator ideal.</li>
+            <li>Peserta didik dapat mengkalkulasi efisiensi transformator nyata serta menganalisis penyebab rugi-rugi daya (losses) pada inti dan kumparan.</li>
+          </ol>
+        </section>
+        <section class="inset">
+          <h3>Penerapan Kehidupan Sehari-hari</h3>
+          <ul class="list-bold">
+            <li><strong>Charger Laptop &amp; Smartphone:</strong> Memakai trafo step-down terpadu untuk menurunkan tegangan PLN 220 V AC menjadi 5–20 V sebelum disearahkan.</li>
+            <li><strong>Jaringan Distribusi Listrik PLN (SUTET):</strong> Trafo step-up menaikkan tegangan hingga 500 kV agar arus transmisi kecil dan rugi panas ($I^2R$) sepanjang kabel jarak jauh sangat minimal, lalu diturunkan oleh trafo step-down di gardu induk.</li>
+          </ul>
+        </section>
+      </div>
+
+      <section>
+        <h3>Penjelasan Materi &amp; Rumus</h3>
+        <p>
+          Transformator bekerja berdasarkan induksi timbal-balik pada dua kumparan yang dihubungkan inti besi lunak berlapis. Hanya arus AC (bolak-balik) yang menghasilkan perubahan fluks kontinu agar trafo berfungsi.
+        </p>
+        <div class="formula-box">
+          <div class="formula-title">Persamaan Trafo Ideal &amp; Efisiensi Trafo Nyata</div>
+          <div class="formula-math">
+            $$\frac{V_p}{V_s} = \frac{N_p}{N_s} = \frac{I_s}{I_p} \quad (\text{Ideal}) \qquad \eta = \frac{P_s}{P_p} \times 100\% = \frac{V_s \cdot I_s}{V_p \cdot I_p} \times 100\%$$
+          </div>
+          <div class="formula-notes">
+            <strong>Klasifikasi:</strong> <em>Step-Up</em> ($N_s > N_p \Rightarrow V_s > V_p$); <em>Step-Down</em> ($N_s < N_p \Rightarrow V_s < V_p$).
+            <br><strong>Penyebab Rugi Daya (Losses):</strong> Arus Eddy pada inti besi, kebocoran fluks magnetik, hambatan kawat tembaga ($I^2R$), dan histeresis magnetik bahan inti.
+          </div>
+        </div>
+      </section>
+
+      <!-- Lab Maya 6 -->
+      <section class="lab-panel" aria-label="Lab Maya 6 Transformator Step-Up dan Step-Down">
+        <div class="lab-header">
+          <h3>Lab Maya 6: Simulator Transformator &amp; Efisiensi Daya</h3>
+          <span class="lab-badge">Simulasi Interaktif</span>
+        </div>
+        <div class="lab-body">
+          <div class="lab-stage">
+            <svg class="lab-svg" id="svg-lab-6" viewBox="0 0 440 240" role="img" aria-label="Diagram inti besi transformator dengan lilitan primer dan sekunder">
+              <!-- Iron Core -->
+              <rect x="115" y="40" width="210" height="160" fill="var(--surface-container)" stroke="var(--outline)" stroke-width="3"/>
+              <rect x="155" y="78" width="130" height="84" fill="var(--background)" stroke="var(--outline)" stroke-width="2.5"/>
+              <!-- Coils -->
+              <g id="lab6-coils-p"></g>
+              <g id="lab6-coils-s"></g>
+              <!-- Labels -->
+              <text x="58" y="34" text-anchor="middle" font-weight="800" font-size="14" fill="var(--primary)">PRIMER (Vp, Np)</text>
+              <text x="382" y="34" text-anchor="middle" font-weight="800" font-size="14" fill="var(--data-2)">SEKUNDER (Vs, Ns)</text>
+              <text id="lab6-type-badge" x="220" y="125" text-anchor="middle" font-weight="800" font-size="16" fill="var(--primary)">STEP-DOWN</text>
+            </svg>
+            <div class="readout-grid">
+              <div class="readout-tile">
+                <div class="readout-label">Tegangan Sekunder (V<sub>s</sub>)</div>
+                <div class="readout-val" id="out-lab6-vs">55.0 V</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Arus Sekunder (I<sub>s</sub>)</div>
+                <div class="readout-val" id="out-lab6-is">7.20 A</div>
+              </div>
+              <div class="readout-tile">
+                <div class="readout-label">Daya Hilang (P<sub>rugi</sub>)</div>
+                <div class="readout-val" id="out-lab6-loss">44.0 W</div>
+              </div>
+            </div>
+          </div>
+          <div class="lab-controls">
+            <div class="btn-row">
+              <button type="button" class="button" onclick="presetLab6('down')">Preset Charger (Step-Down)</button>
+              <button type="button" class="button button--secondary" onclick="presetLab6('up')">Preset SUTET (Step-Up)</button>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab6-vp">Tegangan Primer (V<sub>p</sub>) <span class="control-val" id="val-lab6-vp">220 V</span></label>
+              <input type="range" id="lab6-vp" min="50" max="500" step="10" value="220" oninput="updateLab6()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab6-np">Lilitan Primer (N<sub>p</sub>) <span class="control-val" id="val-lab6-np">800</span></label>
+              <input type="range" id="lab6-np" min="100" max="1200" step="100" value="800" oninput="updateLab6()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab6-ns">Lilitan Sekunder (N<sub>s</sub>) <span class="control-val" id="val-lab6-ns">200</span></label>
+              <input type="range" id="lab6-ns" min="100" max="1600" step="100" value="200" oninput="updateLab6()">
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="lab6-eta">Efisiensi Trafo (&eta;) <span class="control-val" id="val-lab6-eta">90%</span></label>
+              <input type="range" id="lab6-eta" min="60" max="100" step="5" value="90" oninput="updateLab6()">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-section">
+        <div class="quiz-header">
+          <h3>Latihan Soal Bab 6 (5 Soal)</h3>
+          <span class="status-tag" id="score-ch-6">Skor Bab 6: 0 / 5</span>
+        </div>
+        <div class="quiz-list" id="quiz-ch-6"></div>
+      </section>
+      <a class="back-top" href="#top">&uarr; Kembali ke Peta Materi</a>
+    </article>
+
+    <!-- ================= PENUTUP & MOTIVASI ================= -->
+    <section class="chapter" id="penutup">
+      <div class="chapter-head">
+        <span class="chapter-num">Penutup</span>
+        <h2>Rangkuman Materi &amp; Pesan Inspiratif</h2>
+      </div>
+
+      <p>
+        Selamat telah menuntaskan seluruh rangkaian pembelajaran Medan Magnet dan Induksi Elektromagnetik! Kunci dari seluruh bab ini berakar pada satu gagasan besar: <strong>perubahan melahirkan energi</strong>. Tidak ada arus listrik yang lahir dari medan magnet yang diam, tetapi ketika fluks magnetik terus berubah terhadap waktu, arus induksi mengalir menerangi peradaban.
+      </p>
+
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>Bab</th>
+            <th>Konsep Inti</th>
+            <th>Rumus Utama</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Fluks Magnetik</td><td>Kerapatan garis medan menembus bidang</td><td>$\Phi = B A \cos\theta$</td></tr>
+          <tr><td>2. Hukum Faraday &amp; Lenz</td><td>Laju perubahan fluks &amp; arah perlawanan</td><td>$\varepsilon = -N \frac{\Delta \Phi}{\Delta t}$</td></tr>
+          <tr><td>3. Besar GGL Induksi</td><td>Kawat konduktor memotong medan magnet</td><td>$\varepsilon = B l v \sin\theta$</td></tr>
+          <tr><td>4. Generator AC &amp; DC</td><td>Cincin luncur vs komutator cincin belah</td><td>$\varepsilon(t) = N B A \omega \sin(\omega t)$</td></tr>
+          <tr><td>5. Induktansi Diri</td><td>Ketahanan terhadap perubahan arus &amp; energi</td><td>$L = \frac{\mu_0 N^2 A}{l}$, $W = \frac{1}{2} L I^2$</td></tr>
+          <tr><td>6. Transformator</td><td>Pengubah tegangan AC &amp; efisiensi daya</td><td>$\frac{V_p}{V_s} = \frac{N_p}{N_s} = \frac{I_s}{I_p}$, $\eta = \frac{P_s}{P_p}\times 100\%$</td></tr>
+        </tbody>
+      </table>
+
+      <aside class="motivation-block">
+        <h3>Motivasi Medan Magnet &amp; Induksi Elektromagnetik</h3>
+        <p>
+          &ldquo;Jadilah pribadi yang memiliki <strong>medan magnet kebaikan</strong> yang kuat: mampu menarik ilmu, semangat, dan kolaborasi positif di sekitarmu. Namun ingatlah hukum Faraday&mdash;medan yang besar tidak akan menyalakan lampu jika kamu diam di zona nyaman. Teruslah bergerak, ciptakan perubahan fluks usaha setiap hari, dan ubahlah setiap tantangan menjadi <strong>GGL induksi prestasi</strong> yang menerangi masa depanmu.&rdquo;
+        </p>
+      </aside>
+
+      <p style="margin-top: var(--space-lg); font-size: 0.95rem; color: var(--on-surface-variant);">
+        <strong>Sumber Rujukan:</strong> Tipler, P. A. &amp; Mosca, G. (2008), <em>Physics for Scientists and Engineers</em>; Halliday, D., Resnick, R., &amp; Walker, J. (2014), <em>Fundamentals of Physics</em>; Modul Pembelajaran Fisika SMA Kelas XII (Kemendikbudristek RI).
+      </p>
+    </section>
+  </main>
+
+  <api-shim></api-shim>
+  <script>
+    const QUIZ_DATA = [
+      // BAB 1 (5 soal: 2 Mudah, 2 Sukar, 1 HOTS)
+      { ch: 1, diff: `Mudah`, q: `Sebuah bidang persegi dengan luas 0,25 m² diletakkan tegak lurus di dalam medan magnet homogen 4 Tesla. Berapakah fluks magnetik yang menembus bidang tersebut?`, opts: [`0,25 Wb`, `1,00 Wb`, `4,00 Wb`, `16,0 Wb`], ans: 1, exp: `Tegak lurus bidang berarti sudut terhadap garis normal θ = 0° (cos 0° = 1). Maka Φ = B·A·cos 0° = 4 × 0,25 × 1 = 1,00 Wb.` },
+      { ch: 1, diff: `Mudah`, q: `Apabila arah garis medan magnet sejajar dengan permukaan bidang datar, besar fluks magnetik yang menembus bidang adalah...`, opts: [`Maksimum`, `Setengah nilai maksimum`, `Nol`, `Tak hingga`], ans: 2, exp: `Medan magnet sejajar bidang berarti membentuk sudut θ = 90° terhadap garis normal. Karena cos 90° = 0, maka Φ = 0 Wb.` },
+      { ch: 1, diff: `Sukar`, q: `Bidang seluas 400 cm² berada dalam medan magnet homogen 0,5 T dengan membentuk sudut 30° terhadap arah medan magnet. Besar fluks magnetik yang menembus bidang adalah...`, opts: [`0,010 Wb`, `0,017 Wb`, `0,020 Wb`, `0,100 Wb`], ans: 0, exp: `A = 400 cm² = 0,04 m². Sudut bidang ke B = 30°, sehingga sudut normal θ = 90° - 30° = 60°. Φ = 0,5 × 0,04 × cos 60° = 0,02 × 0,5 = 0,010 Wb.` },
+      { ch: 1, diff: `Sukar`, q: `Sebuah kumparan lingkaran berjari-jari 10 cm ditembus fluks magnetik sebesar 3,14 × 10⁻³ Wb saat sudut normalnya 60°. Kuat medan magnet yang melingkupinya adalah... (π = 3,14)`, opts: [`0,1 T`, `0,2 T`, `0,4 T`, `0,5 T`], ans: 1, exp: `A = πr² = 3,14 × (0,1)² = 0,0314 m². Φ = B·A·cos 60° ⇒ 3,14×10⁻³ = B × 0,0314 × 0,5 ⇒ B = 0,2 T.` },
+      { ch: 1, diff: `HOTS`, q: `Dalam mesin MRI, pasien berada pada terowongan dengan medan magnet 1,5 T. Jika sebuah cincin logam kecil (luas 2 cm²) pada awalnya tegak lurus medan, lalu dimiringkan hingga sudutnya terhadap garis normal menjadi 60°, persentase penurunan fluks yang menembus cincin adalah...`, opts: [`25%`, `50%`, `75%`, `86,6%`], ans: 1, exp: `Fluks awal (θ=0°) adalah Φ₁ = BA. Fluks akhir (θ=60°) adalah Φ₂ = BA cos 60° = 0,5 BA. Penurunannya tepat 50%.` },
+
+      // BAB 2 (5 soal)
+      { ch: 2, diff: `Mudah`, q: `Menurut Hukum Faraday, besarnya GGL induksi pada ujung kumparan berbanding lurus dengan...`, opts: [`Kuat medan magnet konstan`, `Hambatan kawat kumparan`, `Laju perubahan fluks magnetik`, `Panjang kawat penghubung`], ans: 2, exp: `Hukum Faraday menyatakan ε = -N (ΔΦ/Δt), yakni sebanding dengan jumlah lilitan dan laju perubahan fluks magnetik.` },
+      { ch: 2, diff: `Mudah`, q: `Tanda negatif pada persamaan Hukum Faraday (ε = -N dΦ/dt) merupakan perwujudan dari...`, opts: [`Hukum Coulomb`, `Hukum Lenz`, `Hukum Ohm`, `Hukum Biot-Savart`], ans: 1, exp: `Hukum Lenz menyatakan arah arus induksi menghasilkan medan magnet induksi yang menentang perubahan fluks penyebabnya.` },
+      { ch: 2, diff: `Sukar`, q: `Sebuah kumparan dengan 500 lilitan mengalami perubahan fluks magnetik dari 0,08 Wb menjadi 0,02 Wb dalam waktu 0,15 sekon. Besar GGL induksi yang timbul adalah...`, opts: [`100 V`, `200 V`, `300 V`, `400 V`], ans: 1, exp: `|ε| = N |ΔΦ/Δt| = 500 × |0,02 - 0,08| / 0,15 = 500 × (0,06 / 0,15) = 200 V.` },
+      { ch: 2, diff: `Sukar`, q: `Fluks magnetik yang dilingkupi kumparan 200 lilitan berubah menurut fungsi Φ(t) = (2t² + 4t + 5) mWb. Besar GGL induksi pada saat t = 2 sekon adalah...`, opts: [`1,6 V`, `2,4 V`, `3,2 V`, `4,0 V`], ans: 1, exp: `dΦ/dt = (4t + 4) mWb/s. Pada t = 2 s, dΦ/dt = 12 mWb/s = 0,012 Wb/s. Maka |ε| = 200 × 0,012 = 2,4 V.` },
+      { ch: 2, diff: `HOTS`, q: `Kutub Utara (U) magnet batang digerakkan menjauhi ujung kumparan secara cepat. Berdasarkan Hukum Lenz, ujung kumparan yang berhadapan dengan magnet akan membentuk kutub... dan mengapa?`, opts: [`Utara, untuk mendorong magnet menjauh`, `Selatan, untuk menarik dan menahan gerakan magnet menjauh`, `Utara, karena arus induksi selalu searah jarum jam`, `Netral, karena fluks magnet berkurang`], ans: 1, exp: `Saat kutub Utara menjauh, fluks berkurang. Hukum Lenz menentang pengurangan ini dengan membentuk kutub Selatan guna menarik magnet.` },
+
+      // BAB 3 (5 soal)
+      { ch: 3, diff: `Mudah`, q: `Sebatang kawat konduktor sepanjang 0,5 m bergerak tegak lurus memotong medan magnet 0,4 T dengan kelajuan 10 m/s. Besar GGL induksi antara kedua ujung kawat adalah...`, opts: [`0,2 V`, `2,0 V`, `4,0 V`, `20 V`], ans: 1, exp: `ε = B·l·v·sin 90° = 0,4 × 0,5 × 10 × 1 = 2,0 V.` },
+      { ch: 3, diff: `Mudah`, q: `Jika kawat konduktor bergerak sejajar dengan arah garis gaya medan magnet (θ = 0°), maka GGL induksi pada ujung-ujung kawat adalah...`, opts: [`Nol`, `Maksimum`, `Negatif konstan`, `Sebanding panjang kawat`], ans: 0, exp: `Karena sin 0° = 0, tidak ada garis medan magnet yang terpotong sehingga ε = B·l·v·sin 0° = 0 V.` },
+      { ch: 3, diff: `Sukar`, q: `Kawat PQ sepanjang 40 cm digerakkan pada rel-U berhambatan R = 2 Ω dengan kecepatan 5 m/s memotong tegak lurus medan magnet B = 0,5 T. Kuat arus induksi yang mengalir adalah...`, opts: [`0,25 A`, `0,50 A`, `1,00 A`, `2,00 A`], ans: 1, exp: `ε = 0,5 × 0,4 × 5 = 1,0 V. Kuat arus I = ε / R = 1,0 / 2 = 0,50 A.` },
+      { ch: 3, diff: `Sukar`, q: `Sebuah kumparan 100 lilitan berluas 0,05 m² berada tegak lurus medan magnet yang kuat medannya berubah seragam dari 0,2 T menjadi 1,0 T dalam 0,4 s. Besar GGL induksinya adalah...`, opts: [`5 V`, `10 V`, `15 V`, `20 V`], ans: 1, exp: `|ε| = N·A·(ΔB/Δt) = 100 × 0,05 × (0,8 / 0,4) = 5 × 2 = 10 V.` },
+      { ch: 3, diff: `HOTS`, q: `Kawat penghantar pada rel-U sepanjang 0,5 m ditarik ke kanan dengan kecepatan tetap 4 m/s di dalam medan magnet 1 T. Jika hambatan rangkaian 2 Ω, berapakah gaya tarik eksternal minimum yang diperlukan untuk mempertahankan gerak konstan tersebut?`, opts: [`0,25 N`, `0,50 N`, `1,00 N`, `2,00 N`], ans: 1, exp: `ε = 1×0,5×4 = 2 V ⇒ I = 2/2 = 1 A. Gaya Lorentz penahan F = B·I·l = 1 × 1 × 0,5 = 0,50 N.` },
+
+      // BAB 4 (5 soal)
+      { ch: 4, diff: `Mudah`, q: `Komponen pembeda utama pada generator DC sehingga menghasilkan arus searah adalah penggunaan...`, opts: [`Cincin luncur ganda`, `Komutator (cincin belah)`, `Inti besi lunak`, `Transformator step-up`], ans: 1, exp: `Generator DC memakai komutator (cincin belah) yang membalik kontak setiap setengah putaran agar arah arus tetap searah.` },
+      { ch: 4, diff: `Mudah`, q: `GGL maksimum yang dihasilkan sebuah generator AC sebanding dengan besaran-besaran berikut, KECUALI...`, opts: [`Jumlah lilitan kumparan (N)`, `Kuat medan magnet (B)`, `Kecepatan sudut putaran (ω)`, `Hambatan jenis kabel distribusi`], ans: 3, exp: `Karena ε_maks = N·B·A·ω, GGL maksimum tidak bergantung pada hambatan jenis kabel distribusi.` },
+      { ch: 4, diff: `Sukar`, q: `Kumparan generator terdiri atas 200 lilitan berluas 0,02 m² diputar dengan kecepatan sudut 50 rad/s dalam medan magnet 0,5 T. GGL maksimum yang dihasilkan adalah...`, opts: [`50 V`, `100 V`, `150 V`, `200 V`], ans: 1, exp: `ε_maks = N·B·A·ω = 200 × 0,5 × 0,02 × 50 = 100 V.` },
+      { ch: 4, diff: `Sukar`, q: `Sebuah generator menghasilkan GGL maksimum 120 V. Ketika sudut putar kumparan terhadap garis normal mencapai 30°, GGL sesaat yang terbaca adalah...`, opts: [`30 V`, `60 V`, `60√2 V`, `60√3 V`], ans: 1, exp: `ε(t) = ε_maks sin θ = 120 × sin 30° = 120 × 0,5 = 60 V.` },
+      { ch: 4, diff: `HOTS`, q: `Pada sebuah turbin PLTA, debit air meningkat sehingga frekuensi putaran generator naik 2 kali lipat sementara kuat medan magnet eksitasi diturunkan menjadi setengahnya. Bagaimana nilai GGL maksimum generator sekarang?`, opts: [`Tetap sama seperti semula`, `Menjadi 2 kali lipat`, `Menjadi 4 kali lipat`, `Menjadi setengahnya`], ans: 0, exp: `ω' = 2ω dan B' = 0,5 B. Maka ε'_maks = N·(0,5 B)·A·(2ω) = N·B·A·ω, nilainya tetap sama.` },
+
+      // BAB 5 (5 soal)
+      { ch: 5, diff: `Mudah`, q: `Satuan Sistem Internasional (SI) dari besaran induktansi diri (L) adalah...`, opts: [`Weber`, `Tesla`, `Henry`, `Farad`], ans: 2, exp: `Induktansi diri (L) memiliki satuan Henry (H), sedangkan Weber untuk fluks dan Tesla untuk medan magnet.` },
+      { ch: 5, diff: `Mudah`, q: `Jika kuat arus listrik yang mengalir pada induktor ideal 4 H dibuat konstan sebesar 5 A (tidak berubah), maka GGL induksi dirinya adalah...`, opts: [`0 V`, `1,25 V`, `20 V`, `50 V`], ans: 0, exp: `Arus konstan berarti ΔI/Δt = 0, sehingga ε = -L (0) = 0 V.` },
+      { ch: 5, diff: `Sukar`, q: `Arus dalam kumparan berinduktansi 0,4 H turun secara seragam dari 6 A menjadi 1 A dalam waktu 0,05 sekon. Besar GGL induksi diri yang timbul adalah...`, opts: [`20 V`, `30 V`, `40 V`, `50 V`], ans: 2, exp: `|ε| = L |ΔI/Δt| = 0,4 × |(1 - 6) / 0,05| = 0,4 × 100 = 40 V.` },
+      { ch: 5, diff: `Sukar`, q: `Sebuah induktor dengan induktansi diri 0,8 H dialiri arus listrik 5 A. Energi magnetik yang tersimpan di dalam induktor tersebut adalah...`, opts: [`4 J`, `10 J`, `20 J`, `40 J`], ans: 1, exp: `W = ½ L I² = 0,5 × 0,8 × 5² = 0,4 × 25 = 10 J.` },
+      { ch: 5, diff: `HOTS`, q: `Dua solenoida identik di udara memiliki panjang dan luas sama, namun solenoida B memiliki jumlah lilitan 2 kali lebih banyak dari solenoida A dan dialiri arus setengah kali arus A. Perbandingan energi tersimpan W_B : W_A adalah...`, opts: [`1 : 2`, `1 : 1`, `2 : 1`, `4 : 1`], ans: 1, exp: `L ∝ N², jadi L_B = 4 L_A. Dengan I_B = 0,5 I_A, maka W_B = ½(4L_A)(0,5 I_A)² = ½(4)(0,25) L_A I_A² = W_A. Perbandingan 1 : 1.` },
+
+      // BAB 6 (5 soal)
+      { ch: 6, diff: `Mudah`, q: `Transformator yang berfungsi menaikkan tegangan listrik AC (V_s > V_p) memiliki karakteristik jumlah lilitan...`, opts: [`N_s > N_p`, `N_s < N_p`, `N_s = N_p`, `N_p = 0`], ans: 0, exp: `Karena V_p/V_s = N_p/N_s, untuk menghasilkan V_s > V_p diperlukan N_s > N_p (trafo step-up).` },
+      { ch: 6, diff: `Mudah`, q: `Mengapa transformator TIDAK dapat bekerja jika kumparan primernya dihubungkan dengan sumber baterai DC murni?`, opts: [`Baterai DC terlalu lemah`, `Arus DC konstan tidak menghasilkan perubahan fluks magnetik`, `Inti besi akan meleleh oleh arus DC`, `Kumparan sekunder akan putus`], ans: 1, exp: `Induksi timbal-balik membutuhkan laju perubahan fluks (dΦ/dt ≠ 0), sedangkan arus DC konstan menghasilkan fluks tetap.` },
+      { ch: 6, diff: `Sukar`, q: `Trafo ideal memiliki 1.000 lilitan primer dan 250 lilitan sekunder. Jika tegangan primer 220 V dan arus sekunder 4 A, berapakah tegangan sekunder dan arus primernya?`, opts: [`55 V dan 1 A`, `55 V dan 16 A`, `880 V dan 1 A`, `880 V dan 16 A`], ans: 0, exp: `V_s = (N_s/N_p) V_p = (250/1000)×220 = 55 V. Pada trafo ideal I_p = (N_s/N_p) I_s = 0,25 × 4 = 1 A.` },
+      { ch: 6, diff: `Sukar`, q: `Sebuah transformator memiliki efisiensi 80%. Jika daya masukan pada kumparan primer 250 Watt, maka daya keluaran pada kumparan sekunder adalah...`, opts: [`150 W`, `200 W`, `250 W`, `312,5 W`], ans: 1, exp: `P_s = η × P_p = 80% × 250 W = 200 W.` },
+      { ch: 6, diff: `HOTS`, q: `Sebuah pabrik menyalurkan daya listrik 100 kW melalui kabel transmisi berhambatan total 2 Ω. Dibandingkan mengirim pada tegangan 1.000 V, berapa kali lebih kecilkah rugi panas kabel jika tegangan dinaikkan dengan trafo step-up menjadi 10.000 V?`, opts: [`10 kali lebih kecil`, `20 kali lebih kecil`, `100 kali lebih kecil`, `1.000 kali lebih kecil`], ans: 2, exp: `P = V·I tetap, sehingga menaikkan V sebesar 10 kali menurunkan arus I menjadi 1/10 kalinya. Rugi daya P_rugi = I²R menjadi (1/10)² = 1/100 kali semula.` }
+    ];
+
+    let appState = { answers: {} };
+    let lab2Pol = 1; // 1 = Right is U, -1 = Right is S
+    let lab2AnimId = null;
+    let lab3AnimOn = false;
+    let lab3AnimId = null;
+    let lab3X = 180;
+    let lab4Mode = 'AC';
+    let lab4Playing = true;
+    let lab4Phase = 0;
+    let lab4Points = [];
+
+    function renderQuizzes() {
+      for (let c = 1; c <= 6; c++) {
+        const container = document.getElementById(`quiz-ch-${c}`);
+        if (!container) continue;
+        const qs = QUIZ_DATA.map((item, idx) => ({ item, idx })).filter(x => x.item.ch === c);
+        container.innerHTML = qs.map((entry, localIdx) => {
+          const { item, idx } = entry;
+          const badgeClass = item.diff === `Mudah` ? `status-tag--mudah` : (item.diff === `Sukar` ? `status-tag--sukar` : `status-tag--hots`);
+          const userAns = appState.answers[idx];
+          const letters = [`A`, `B`, `C`, `D`];
+          const optsHtml = item.opts.map((opt, oIdx) => {
+            let cls = `quiz-opt-btn`;
+            if (userAns !== undefined) {
+              if (oIdx === item.ans) cls += ` is-correct`;
+              else if (oIdx === userAns) cls += ` is-wrong`;
+            }
+            return `<button type="button" class="${cls}" onclick="answerQuestion(${idx}, ${oIdx})"><span class="opt-letter">${letters[oIdx]}</span><span>${opt}</span></button>`;
+          }).join(``);
+          let fbCls = `quiz-feedback`;
+          let fbText = ``;
+          if (userAns !== undefined) {
+            const ok = userAns === item.ans;
+            fbCls += ok ? ` is-visible is-ok` : ` is-visible is-err`;
+            fbText = `${ok ? `Benar!` : `Belum tepat. Jawaban benar: ${letters[item.ans]}.`} ${item.exp}`;
+          }
+          return `
+            <div class="quiz-card">
+              <div class="quiz-q-top">
+                <span class="quiz-q-num">Soal ${c}.${localIdx + 1}</span>
+                <span class="status-tag ${badgeClass}">${item.diff}</span>
+              </div>
+              <div class="quiz-question">${item.q}</div>
+              <div class="quiz-options">${optsHtml}</div>
+              <div class="${fbCls}" id="fb-${idx}">${fbText}</div>
+            </div>
+          `;
+        }).join(``);
+      }
+      updateAllScores();
+      renderKaTeX();
+    }
+
+    function answerQuestion(qIdx, optIdx) {
+      appState.answers[qIdx] = optIdx;
+      saveAppState();
+      renderQuizzes();
+    }
+
+    function updateAllScores() {
+      let totalCorrect = 0;
+      let totalAnswered = 0;
+      for (let c = 1; c <= 6; c++) {
+        const chItems = QUIZ_DATA.map((item, idx) => ({ item, idx })).filter(x => x.item.ch === c);
+        let chCorrect = 0;
+        chItems.forEach(({ item, idx }) => {
+          const a = appState.answers[idx];
+          if (a !== undefined) {
+            totalAnswered++;
+            if (a === item.ans) {
+              chCorrect++;
+              totalCorrect++;
+            }
+          }
+        });
+        const badge = document.getElementById(`score-ch-${c}`);
+        if (badge) badge.textContent = `Skor Bab ${c}: ${chCorrect} / 5`;
+      }
+      const gs = document.getElementById(`global-score`);
+      const gp = document.getElementById(`global-progress`);
+      if (gs) gs.textContent = `${totalCorrect} / 30`;
+      if (gp) gp.textContent = `${totalAnswered} soal terjawab dari 30 soal`;
+    }
+
+    function handleResetProgress(btn) {
+      if (!btn) return;
+      if (btn.dataset.armed !== `true`) {
+        btn.dataset.armed = `true`;
+        btn.textContent = `Klik sekali lagi untuk konfirmasi`;
+        return;
+      }
+      btn.dataset.armed = `false`;
+      btn.textContent = `Ulangi Semua Jawaban`;
+      appState = { answers: {} };
+      saveAppState();
+      renderQuizzes();
+    }
+
+    // Lab 1: Fluks Magnetik
+    function updateLab1() {
+      const bEl = document.getElementById(`lab1-b`);
+      const aEl = document.getElementById(`lab1-a`);
+      const tEl = document.getElementById(`lab1-theta`);
+      if (!bEl || !aEl || !tEl) return;
+      const b = parseFloat(bEl.value);
+      const a = parseFloat(aEl.value);
+      const deg = parseInt(tEl.value, 10);
+      const cosVal = Math.cos(deg * Math.PI / 180);
+      const phi = b * a * cosVal;
+
+      document.getElementById(`val-lab1-b`).textContent = `${b.toFixed(1)} T`;
+      document.getElementById(`val-lab1-a`).textContent = `${a.toFixed(2)} m²`;
+      document.getElementById(`val-lab1-theta`).textContent = `${deg}°`;
+      document.getElementById(`out-lab1-cos`).textContent = cosVal.toFixed(3);
+      document.getElementById(`out-lab1-phi`).textContent = `${phi.toFixed(3)} Wb`;
+
+      let status = `Menurun`;
+      let msg = `Sebagian garis medan menembus bidang miring dengan faktor cos(${deg}°) = ${cosVal.toFixed(2)}.`;
+      if (deg === 0) {
+        status = `Maksimum`;
+        msg = `Pada θ = 0°, seluruh garis medan menembus bidang tegak lurus sehingga fluks magnetik mencapai nilai maksimum.`;
+      } else if (deg === 90) {
+        status = `Nol (Sejajar)`;
+        msg = `Pada θ = 90°, medan magnet sejajar permukaan bidang. Tidak ada satu pun garis medan yang menembus bidang (Φ = 0 Wb).`;
+      }
+      document.getElementById(`out-lab1-status`).textContent = status;
+      document.getElementById(`lab1-insight`).textContent = msg;
+      document.getElementById(`lab1-angle-label`).textContent = `θ = ${deg}° (terhadap garis normal)`;
+
+      const planeGroup = document.getElementById(`lab1-plane-group`);
+      if (planeGroup) planeGroup.setAttribute(`transform`, `translate(230, 130) rotate(${-deg})`);
+      const planeRect = document.getElementById(`lab1-plane-rect`);
+      if (planeRect) {
+        const h = 70 + a * 90;
+        planeRect.setAttribute(`y`, (-h / 2).toFixed(1));
+        planeRect.setAttribute(`height`, h.toFixed(1));
+      }
+      const linesGroup = document.getElementById(`lab1-field-lines`);
+      if (linesGroup) {
+        const count = Math.round(2 + b * 2);
+        let html = ``;
+        for (let i = 0; i < count; i++) {
+          const y = 45 + (i * 170) / Math.max(1, count - 1);
+          html += `<line x1="25" y1="${y}" x2="410" y2="${y}" stroke="var(--data-1)" stroke-width="2.5" marker-end="url(#arrow-b1)"/>`;
+        }
+        linesGroup.innerHTML = html;
+      }
+    }
+
+    // Lab 2: Faraday & Lenz
+    function updateLab2Coil() {
+      const nEl = document.getElementById(`lab2-n`);
+      const g = document.getElementById(`lab2-coil-turns`);
+      if (!nEl || !g) return;
+      const n = parseInt(nEl.value, 10);
+      document.getElementById(`val-lab2-n`).textContent = `${n} lilitan`;
+      const loops = Math.max(4, Math.round(n / 40));
+      let html = ``;
+      for (let i = 0; i < loops; i++) {
+        const x = 245 + (i * 100) / (loops - 1);
+        html += `<line x1="${x}" y1="86" x2="${x}" y2="174" stroke="var(--data-2)" stroke-width="4" stroke-linecap="round"/>`;
+      }
+      g.innerHTML = html;
+    }
+
+    function updateLab2Labels() {
+      const vEl = document.getElementById(`lab2-v`);
+      if (vEl) document.getElementById(`val-lab2-v`).textContent = `${parseFloat(vEl.value).toFixed(1)} m/s`;
+    }
+
+    function toggleLab2Polarity() {
+      lab2Pol *= -1;
+      const leftRect = document.getElementById(`lab2-mag-left`);
+      const rightRect = document.getElementById(`lab2-mag-right`);
+      const leftTxt = document.getElementById(`lab2-pole-left`);
+      const rightTxt = document.getElementById(`lab2-pole-right`);
+      if (lab2Pol === 1) {
+        leftRect.setAttribute(`fill`, `var(--data-2)`);
+        rightRect.setAttribute(`fill`, `var(--tertiary)`);
+        leftTxt.textContent = `S`;
+        rightTxt.textContent = `U`;
+      } else {
+        leftRect.setAttribute(`fill`, `var(--tertiary)`);
+        rightRect.setAttribute(`fill`, `var(--data-2)`);
+        leftTxt.textContent = `U`;
+        rightTxt.textContent = `S`;
+      }
+    }
+
+    let lastPos = 35;
+    let stopTimer = null;
+    function moveMagnetManual(val) {
+      const pos = parseFloat(val);
+      const delta = pos - lastPos;
+      lastPos = pos;
+      applyLab2Physics(pos, delta * 0.5);
+      clearTimeout(stopTimer);
+      stopTimer = setTimeout(() => applyLab2Physics(pos, 0), 180);
+    }
+
+    function animateMagnet(dir) {
+      cancelAnimationFrame(lab2AnimId);
+      const posSlider = document.getElementById(`lab2-pos`);
+      const vSlider = document.getElementById(`lab2-v`);
+      if (!posSlider || !vSlider) return;
+      const speed = parseFloat(vSlider.value) * 1.4;
+      const target = dir < 0 ? 185 : 30;
+      let cur = parseFloat(posSlider.value);
+
+      function step() {
+        const diff = target - cur;
+        if (Math.abs(diff) <= speed) {
+          cur = target;
+          posSlider.value = cur;
+          lastPos = cur;
+          applyLab2Physics(cur, 0);
+          return;
+        }
+        const dv = diff > 0 ? speed : -speed;
+        cur += dv;
+        posSlider.value = cur;
+        lastPos = cur;
+        applyLab2Physics(cur, dv);
+        lab2AnimId = requestAnimationFrame(step);
+      }
+      lab2AnimId = requestAnimationFrame(step);
+    }
+
+    function applyLab2Physics(pos, vel) {
+      const mag = document.getElementById(`lab2-magnet`);
+      if (mag) mag.setAttribute(`transform`, `translate(${pos}, 110)`);
+      document.getElementById(`val-lab2-pos`).textContent = pos > 125 ? `Di Dalam` : `Di Luar`;
+
+      const n = parseInt(document.getElementById(`lab2-n`).value, 10);
+      const prox = Math.exp(-Math.pow((pos - 145) / 65, 2));
+      const emf = (n / 100) * vel * prox * lab2Pol * 1.8;
+      const absEmf = Math.abs(emf);
+
+      document.getElementById(`out-lab2-emf`).textContent = `${emf.toFixed(2)} V`;
+      const needle = document.getElementById(`lab2-needle`);
+      const angle = Math.max(-55, Math.min(55, emf * 4.5));
+      if (needle) needle.setAttribute(`transform`, `rotate(${angle} 150 180)`);
+
+      const glow = document.getElementById(`lab2-led-glow`);
+      const bulb = document.getElementById(`lab2-led-bulb`);
+      const ledText = document.getElementById(`out-lab2-led`);
+      if (absEmf > 0.3) {
+        glow.setAttribute(`opacity`, Math.min(0.95, absEmf / 10).toFixed(2));
+        bulb.setAttribute(`fill`, `var(--focus-yellow)`);
+        ledText.textContent = absEmf > 5 ? `Terang` : `Menyala`;
+      } else {
+        glow.setAttribute(`opacity`, `0`);
+        bulb.setAttribute(`fill`, `var(--surface-container)`);
+        ledText.textContent = `Padam`;
+      }
+
+      const lenzEl = document.getElementById(`lab2-lenz-pole`);
+      const lenzOut = document.getElementById(`out-lab2-lenz`);
+      const dirEl = document.getElementById(`lab2-current-dir`);
+      const msgEl = document.getElementById(`lab2-lenz-msg`);
+
+      if (Math.abs(vel) < 0.05) {
+        lenzEl.textContent = `Kumparan: Diam (Fluks Tetap)`;
+        lenzOut.textContent = `Netral`;
+        dirEl.textContent = `Arus Induksi: 0 A`;
+        msgEl.textContent = `Magnet diam: laju perubahan fluks nol, sehingga tidak ada GGL induksi yang muncul.`;
+      } else {
+        const approaching = vel > 0;
+        const frontMagnetPole = lab2Pol === 1 ? `Utara` : `Selatan`;
+        const inducedPole = approaching ? frontMagnetPole : (frontMagnetPole === `Utara` ? `Selatan` : `Utara`);
+        lenzEl.textContent = `Sisi Kiri Kumparan: Kutub ${inducedPole}`;
+        lenzOut.textContent = `Kutub ${inducedPole}`;
+        dirEl.textContent = emf > 0 ? `Arus: Kanan → Kiri` : `Arus: Kiri → Kanan`;
+        msgEl.textContent = approaching
+          ? `Kutub ${frontMagnetPole} mendekat: sesuai Hukum Lenz, kumparan memunculkan kutub ${inducedPole} untuk menolak magnet.`
+          : `Kutub ${frontMagnetPole} menjauh: sesuai Hukum Lenz, kumparan memunculkan kutub ${inducedPole} untuk menarik magnet agar tetap.`;
+      }
+    }
+
+    // Lab 3: Kawat Bergerak
+    function initLab3Field() {
+      const g = document.getElementById(`lab3-field-x`);
+      if (!g) return;
+      let html = ``;
+      for (let x = 95; x <= 370; x += 45) {
+        for (let y = 78; y <= 185; y += 35) {
+          html += `<text x="${x}" y="${y}">&otimes;</text>`;
+        }
+      }
+      g.innerHTML = html;
+    }
+
+    function updateLab3() {
+      const b = parseFloat(document.getElementById(`lab3-b`).value);
+      const l = parseFloat(document.getElementById(`lab3-l`).value);
+      const v = parseFloat(document.getElementById(`lab3-v`).value);
+      const r = parseFloat(document.getElementById(`lab3-r`).value);
+      document.getElementById(`val-lab3-b`).textContent = `${b.toFixed(1)} T`;
+      document.getElementById(`val-lab3-l`).textContent = `${l.toFixed(1)} m`;
+      document.getElementById(`val-lab3-v`).textContent = `${v.toFixed(1)} m/s`;
+      document.getElementById(`val-lab3-r`).textContent = `${r} Ω`;
+
+      const emf = b * l * v;
+      const i = emf / r;
+      const f = b * i * l;
+      document.getElementById(`out-lab3-emf`).textContent = `${emf.toFixed(2)} V`;
+      document.getElementById(`out-lab3-i`).textContent = `${i.toFixed(2)} A`;
+      document.getElementById(`out-lab3-f`).textContent = `${f.toFixed(2)} N`;
+    }
+
+    function toggleLab3Anim() {
+      lab3AnimOn = !lab3AnimOn;
+      const btn = document.getElementById(`lab3-anim-btn`);
+      if (btn) btn.textContent = lab3AnimOn ? `Hentikan Kawat` : `Jalankan Gerak Kawat`;
+      if (lab3AnimOn) {
+        function loop() {
+          if (!lab3AnimOn) return;
+          const v = parseFloat(document.getElementById(`lab3-v`).value);
+          lab3X += v * 0.35;
+          if (lab3X > 345) lab3X = 115;
+          const rod = document.getElementById(`lab3-rod`);
+          if (rod) rod.setAttribute(`transform`, `translate(${lab3X.toFixed(1)}, 0)`);
+          lab3AnimId = requestAnimationFrame(loop);
+        }
+        lab3AnimId = requestAnimationFrame(loop);
+      } else {
+        cancelAnimationFrame(lab3AnimId);
+      }
+    }
+
+    // Lab 4: Generator AC/DC
+    function setLab4Mode(mode) {
+      lab4Mode = mode;
+      const btnAc = document.getElementById(`btn-gen-ac`);
+      const btnDc = document.getElementById(`btn-gen-dc`);
+      if (btnAc && btnDc) {
+        btnAc.className = mode === `AC` ? `button is-active` : `button button--secondary`;
+        btnDc.className = mode === `DC` ? `button is-active` : `button button--secondary`;
+      }
+      document.getElementById(`lab4-ring-label`).textContent = mode === `AC` ? `Cincin Luncur (AC)` : `Komutator Belah (DC)`;
+      document.getElementById(`out-lab4-mode`).textContent = mode === `AC` ? `Slip Ring (AC)` : `Komutator (DC)`;
+    }
+
+    function updateLab4Params() {
+      const n = parseInt(document.getElementById(`lab4-n`).value, 10);
+      const b = parseFloat(document.getElementById(`lab4-b`).value);
+      const w = parseFloat(document.getElementById(`lab4-w`).value);
+      document.getElementById(`val-lab4-n`).textContent = `${n}`;
+      document.getElementById(`val-lab4-b`).textContent = `${b.toFixed(2)} T`;
+      document.getElementById(`val-lab4-w`).textContent = `${w.toFixed(1)} rad/s`;
+      const maxEmf = n * b * 0.1 * w;
+      document.getElementById(`out-lab4-max`).textContent = `${maxEmf.toFixed(1)} V`;
+    }
+
+    function toggleLab4Play() {
+      lab4Playing = !lab4Playing;
+      const btn = document.getElementById(`lab4-play-btn`);
+      if (btn) btn.textContent = lab4Playing ? `Jeda Putaran` : `Putar Generator`;
+    }
+
+    function tickLab4() {
+      if (lab4Playing) {
+        const w = parseFloat(document.getElementById(`lab4-w`).value);
+        const n = parseInt(document.getElementById(`lab4-n`).value, 10);
+        const b = parseFloat(document.getElementById(`lab4-b`).value);
+        const maxEmf = n * b * 0.1 * w;
+        lab4Phase += w * 0.015;
+        let sinVal = Math.sin(lab4Phase);
+        if (lab4Mode === `DC`) sinVal = Math.abs(sinVal);
+        const inst = maxEmf * sinVal;
+        document.getElementById(`out-lab4-inst`).textContent = `${inst.toFixed(1)} V`;
+
+        const rx = Math.max(4, Math.abs(Math.cos(lab4Phase)) * 42);
+        const ell = document.getElementById(`lab4-coil-ellipse`);
+        if (ell) ell.setAttribute(`rx`, rx.toFixed(1));
+
+        lab4Points.push(sinVal);
+        if (lab4Points.length > 90) lab4Points.shift();
+        const poly = document.getElementById(`lab4-wave`);
+        if (poly) {
+          const scaleAmp = Math.min(82, maxEmf * 0.65 + 15);
+          const pts = lab4Points.map((v, idx) => {
+            const x = 232 + (idx / 89) * 206;
+            const y = 127 - v * scaleAmp;
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+          }).join(` `);
+          poly.setAttribute(`points`, pts);
+        }
+      }
+      requestAnimationFrame(tickLab4);
+    }
+
+    // Lab 5: Induktansi Diri
+    function updateLab5() {
+      const n = parseInt(document.getElementById(`lab5-n`).value, 10);
+      const l = parseFloat(document.getElementById(`lab5-l`).value);
+      const i = parseFloat(document.getElementById(`lab5-i`).value);
+      const didt = parseFloat(document.getElementById(`lab5-didt`).value);
+
+      document.getElementById(`val-lab5-n`).textContent = `${n}`;
+      document.getElementById(`val-lab5-l`).textContent = `${l.toFixed(2)} m`;
+      document.getElementById(`val-lab5-i`).textContent = `${i.toFixed(1)} A`;
+      document.getElementById(`val-lab5-didt`).textContent = `${didt} A/s`;
+
+      const A = 0.002; // 20 cm^2
+      const mu0 = 4 * Math.PI * 1e-7;
+      const L = (mu0 * n * n * A) / l; // Henry
+      const emf = L * didt;
+      const W = 0.5 * L * i * i;
+
+      document.getElementById(`out-lab5-l`).textContent = `${(L * 1000).toFixed(2)} mH`;
+      document.getElementById(`out-lab5-emf`).textContent = `${emf.toFixed(2)} V`;
+      document.getElementById(`out-lab5-w`).textContent = `${(W * 1000).toFixed(2)} mJ`;
+      document.getElementById(`lab5-dim-label`).textContent = `Solenoida: N = ${n} · l = ${l.toFixed(2)} m`;
+
+      const bar = document.getElementById(`lab5-energy-bar`);
+      if (bar) {
+        const h = Math.min(141, Math.max(4, W * 1000 * 0.45));
+        bar.setAttribute(`y`, (188 - h).toFixed(1));
+        bar.setAttribute(`height`, h.toFixed(1));
+      }
+      const wind = document.getElementById(`lab5-windings`);
+      if (wind) {
+        const loops = Math.max(5, Math.round(n / 70));
+        let html = ``;
+        for (let k = 0; k < loops; k++) {
+          const x = 50 + (k * 210) / (loops - 1);
+          html += `<line x1="${x}" y1="60" x2="${x}" y2="140" stroke="var(--data-2)" stroke-width="4" stroke-linecap="round"/>`;
+        }
+        wind.innerHTML = html;
+      }
+    }
+
+    // Lab 6: Transformator
+    function presetLab6(type) {
+      if (type === `down`) {
+        document.getElementById(`lab6-vp`).value = 220;
+        document.getElementById(`lab6-np`).value = 800;
+        document.getElementById(`lab6-ns`).value = 200;
+        document.getElementById(`lab6-eta`).value = 90;
+      } else {
+        document.getElementById(`lab6-vp`).value = 200;
+        document.getElementById(`lab6-np`).value = 200;
+        document.getElementById(`lab6-ns`).value = 1200;
+        document.getElementById(`lab6-eta`).value = 95;
+      }
+      updateLab6();
+    }
+
+    function updateLab6() {
+      const vp = parseFloat(document.getElementById(`lab6-vp`).value);
+      const np = parseInt(document.getElementById(`lab6-np`).value, 10);
+      const ns = parseInt(document.getElementById(`lab6-ns`).value, 10);
+      const eta = parseFloat(document.getElementById(`lab6-eta`).value) / 100;
+
+      document.getElementById(`val-lab6-vp`).textContent = `${vp} V`;
+      document.getElementById(`val-lab6-np`).textContent = `${np}`;
+      document.getElementById(`val-lab6-ns`).textContent = `${ns}`;
+      document.getElementById(`val-lab6-eta`).textContent = `${Math.round(eta * 100)}%`;
+
+      const vs = vp * (ns / np);
+      const ip = 2.0; // arus primer referensi 2 A
+      const pp = vp * ip;
+      const ps = eta * pp;
+      const is = ps / vs;
+      const loss = pp - ps;
+
+      document.getElementById(`out-lab6-vs`).textContent = `${vs.toFixed(1)} V`;
+      document.getElementById(`out-lab6-is`).textContent = `${is.toFixed(2)} A`;
+      document.getElementById(`out-lab6-loss`).textContent = `${loss.toFixed(1)} W`;
+
+      const badge = document.getElementById(`lab6-type-badge`);
+      if (badge) badge.textContent = ns > np ? `STEP-UP` : (ns < np ? `STEP-DOWN` : `ISOLASI 1:1`);
+
+      drawTrafoCoils(`lab6-coils-p`, 110, 145, Math.max(3, Math.round(np / 120)), `var(--primary)`);
+      drawTrafoCoils(`lab6-coils-s`, 295, 330, Math.max(3, Math.round(ns / 120)), `var(--data-2)`);
+    }
+
+    function drawTrafoCoils(id, x1, x2, count, color) {
+      const g = document.getElementById(id);
+      if (!g) return;
+      let html = ``;
+      for (let i = 0; i < count; i++) {
+        const y = 55 + (i * 130) / Math.max(1, count - 1);
+        html += `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${color}" stroke-width="4" stroke-linecap="round"/>`;
+      }
+      g.innerHTML = html;
+    }
+
+    function renderKaTeX() {
+      if (typeof renderMathInElement === `function`) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: `$$`, right: `$$`, display: true },
+            { left: `$`, right: `$`, display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    async function saveAppState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (e) {}
+      }
+    }
+
+    async function initApp() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved && saved.answers) appState = saved;
+        } catch (e) {}
+      }
+      updateLab1();
+      updateLab2Coil();
+      updateLab2Labels();
+      applyLab2Physics(35, 0);
+      initLab3Field();
+      updateLab3();
+      updateLab4Params();
+      tickLab4();
+      updateLab5();
+      updateLab6();
+      renderQuizzes();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    window.addEventListener(`DOMContentLoaded`, () => {
+      initApp();
+      setTimeout(renderKaTeX, 400);
+    });
+  </script>
+</body>
+</html>
